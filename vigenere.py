@@ -19,10 +19,17 @@ def encode(user_input, key, num):
     for i in user_input:
         if num > (len(key) - 1):
             num = 0
-        encrypt_letter = ord(i) + ord(key[num]) - 97
-        if encrypt_letter > 122:
-            encrypt_letter -= 26
-        result.append(chr(encrypt_letter))
+        match i:
+            case i if i.islower():
+                encrypt_letter = ord(i) + ord(key[num]) - 97
+                if encrypt_letter > 122:
+                    encrypt_letter -= 26
+                result.append(chr(encrypt_letter))
+            case i if i.isupper():
+                encrypt_letter = ord(i) + ord(key[num]) - 97
+                if encrypt_letter > 90:
+                    encrypt_letter -= 26
+                result.append(chr(encrypt_letter))
         num += 1
     return result
         
@@ -32,10 +39,17 @@ def decode(user_input, key, num):
     for i in user_input:
         if num > (len(key) - 1):
             num = 0
-        decrypt_letter = ord(i) - ord(key[num]) + 97
-        if decrypt_letter < 97:
-            decrypt_letter += 26
-        result.append(chr(decrypt_letter))
+        match i:
+            case i if i.islower():
+                decrypt_letter = ord(i) - ord(key[num]) + 97
+                if decrypt_letter < 97:
+                    decrypt_letter += 26
+                result.append(chr(decrypt_letter))
+            case i if i.isupper():
+                decrypt_letter = ord(i) - ord(key[num]) + 97
+                if decrypt_letter < 65:
+                    decrypt_letter += 26
+                result.append(chr(decrypt_letter))
         num += 1
     return result
 
